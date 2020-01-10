@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
       },
     }),
     alignItems: 'center',
-    backgroundColor: '#fbfbfb',
+    backgroundColor: '#ccc',
     paddingVertical: 20,
   },
   tabBarInfoText: {

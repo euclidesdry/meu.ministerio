@@ -3,6 +3,7 @@ import { Platform, StyleSheet } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
+import { TabAddNewEventButton } from "../components/buttons/TabAddNewEventButton";
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
@@ -21,7 +22,7 @@ const HomeStack = createStackNavigator(
 );
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: 'Início',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={'ios-briefcase'} />
   ),
@@ -37,7 +38,7 @@ const LinksStack = createStackNavigator(
 );
 
 LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+  tabBarLabel: 'Relatórios',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={'ios-link'} />
   ),
@@ -53,7 +54,7 @@ const SettingsStack = createStackNavigator(
 );
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+  tabBarLabel: 'Configurações',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon 
     focused={focused}
@@ -79,10 +80,29 @@ const tabNavigator = createBottomTabNavigator({
       // ...
       initialRouteName: "HomeStack",
       tabBarOptions: {
-        activeTintColor: '#e91e63',
+        activeTintColor: '#F2A922',
+        inactiveTintColor: '#444444',
+        style: {
+          elevation: 0,
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          backgroundColor: '#efefef',
+          borderTopColor: '#3d3',
+          borderTopWidth: 0,
+          height: 60,
+          paddingHorizontal: 2,
+          paddingVertical: 8,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+        },
+        //Estilização da fonte
+        labelStyle: {
+          fontSize: 16,
+        },
         tabStyle: {
           paddingTop: 0,
-          borderTopWidth: 0
+          borderTopWidth: 0,
         }
       }
     };
