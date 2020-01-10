@@ -1,75 +1,94 @@
 import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { Platform, StyleSheet } from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import TabBarIcon from '../components/TabBarIcon';
-import InicioScreen from '../screens/InicioScreen';
-import PregacaoScreen from '../screens/PregacaoScreen';
-import RelatoriosScreen from '../screens/RelatoriosScreen';
+import HomeScreen from '../screens/HomeScreen';
+import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
-const InicioStack = createStackNavigator({
-  Home: InicioScreen,
+const config = Platform.select({
+  web: { headerMode: 'screen' },
+  default: {},
 });
- InicioStack.navigationOptions = {
-  tabBarLabel: 'Início',
+
+const HomeStack = createStackNavigator(
+  {
+    Home: HomeScreen,
+  },
+  config
+);
+
+HomeStack.navigationOptions = {
+  tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-planet${focused ? '' : '-outline'}`
-          : 'md-planet'
-      }
-    />
+    <TabBarIcon focused={focused} name={'ios-briefcase'} />
   ),
 };
 
-const PregacaoStack = createStackNavigator({
-  Pregacao: PregacaoScreen,
-});
+HomeStack.path = '';
 
-PregacaoStack.navigationOptions = {
-  tabBarLabel: 'Pregação',
+const LinksStack = createStackNavigator(
+  {
+    Links: LinksScreen,
+  },
+  config
+);
+
+LinksStack.navigationOptions = {
+  tabBarLabel: 'Links',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-stopwatch' : 'md-stopwatch'}
-    />
+    <TabBarIcon focused={focused} name={'ios-link'} />
   ),
 };
 
-const RelatoriosStack = createStackNavigator({
-  Relatorios: RelatoriosScreen,
-});
+LinksStack.path = '';
 
-RelatoriosStack.navigationOptions = {
-  tabBarLabel: 'Relatórios',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-copy' : 'md-copy'}
-    />
-  ),
-};
-
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
-});
+const SettingsStack = createStackNavigator(
+  {
+    Settings: SettingsScreen,
+  },
+  config
+);
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Configurações',
+  tabBarLabel: 'Settings',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
+    <TabBarIcon 
+    focused={focused}
+    name={'ios-cog'} />
   ),
 };
 
-export default createBottomTabNavigator({
-  InicioStack,
-  PregacaoStack,
-  RelatoriosStack,
+SettingsStack.path = '';
+
+const tabNavigator = createBottomTabNavigator({
+  HomeStack,
+  LinksStack,
   SettingsStack,
+},
+{
+  defaultNavigationOptions: ({
+    navigation
+  }) => {
+    // ...
+    const active = navigation.isFocused();
+    const width = active ? 2 : 0; // This outputs 3 times, which are 2, 0, 0
+    return {
+      // ...
+      initialRouteName: "HomeStack",
+      tabBarOptions: {
+        activeTintColor: '#e91e63',
+        tabStyle: {
+          paddingTop: 0,
+          borderTopWidth: 0
+        }
+      }
+    };
+  }
 });
+
+tabNavigator.path = '';
+
+export default tabNavigator;
