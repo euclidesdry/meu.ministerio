@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import { TabAddNewEventButton } from "../components/buttons/TabAddNewEventButton";
 import TabBarIcon from '../components/TabBarIcon';
+import AppIcon from '../components/icons/AppIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -24,7 +25,7 @@ const HomeStack = createStackNavigator(
 HomeStack.navigationOptions = {
   tabBarLabel: 'Início',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={'ios-briefcase'} />
+    <AppIcon focused={focused} name={'suitcase-1'} />
   ),
 };
 
@@ -56,9 +57,7 @@ const SettingsStack = createStackNavigator(
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Configurações',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon 
-    focused={focused}
-    name={'ios-cog'} />
+    <TabBarIcon  focused={focused} name={'ios-cog'} />
   ),
 };
 
